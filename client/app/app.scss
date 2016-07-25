@@ -1,0 +1,31 @@
+$icon-font-path: "../bower_components/bootstrap-sass-official/vendor/assets/fonts/bootstrap/";
+@import '../bower_components/bootstrap-sass-official/vendor/assets/stylesheets/bootstrap';
+$fa-font-path: "../bower_components/font-awesome/fonts";
+@import '../bower_components/font-awesome/scss/font-awesome';
+$font-stack: 'Montserrat', sans-serif;
+/**
+ * App-wide Styles
+ */
+
+body{
+	font-family: $font-stack;	
+}
+
+div[ng-view]{
+	height:inherit;
+}
+
+.browserupgrade {
+  margin: 0.2em 0;
+  background: #ccc;
+  color: #000;
+  padding: 0.2em 0;
+}
+
+// Component styles are injected through grunt
+/* inject:scss */
+@import 'account/login/login';
+@import 'admin/admin';
+@import 'dashboard/dashboard';
+@import '../components/footer/footer';
+/* endinject */
