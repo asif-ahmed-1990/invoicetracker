@@ -1,0 +1,10 @@
+<div class="dashboard">
+    <div ng-repeat="val in ownerCtrl.odata">
+        <card name="{{val.COGOwner | firstName}}" amt="{{val.Amount}}" intr="{{val.Interest}}" trackid="{{val.trackid}}" ng-click="ownerCtrl.showAdvanced($event,val.trackid)">></card>
+    </div>
+
+    <div ng-hide="ownerCtrl.odata.length" class="nodata">
+    	<h4>Oops! Found Nothing. Check the filters maybe?</h4>
+    </div>
+
+</div>

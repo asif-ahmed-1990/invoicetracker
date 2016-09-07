@@ -1,0 +1,105 @@
+<md-dialog aria-label="{{item.portfolio}}">
+    <form ng-cloak>
+        <md-toolbar>
+            <div class="md-toolbar-tools">
+                <h2> {{item.portfolio ? 'Portfolio' : 'Owner'}} : {{item.portfolio ? item.portfolio : item.COGOwner}}</h2>
+                <span flex></span>
+                <md-button class="md-icon-button" ng-click="cancel()">
+                    <i class="fa fa-times" aria-hidden="true"></i>
+                </md-button>
+            </div>
+        </md-toolbar>
+        <md-dialog-content>
+            <div class="md-dialog-content">
+                <div layout="row" layout-xs="column">
+                    <div flex class="stats">
+                        <div class="stats-details-label">Amount Due:</div>
+                        <div class="stats-details">{{item.Amount | currency:"£ "}}</div>
+                    </div>
+                    <div flex class="stats">
+                        <div class="stats-details-label">Interest Due:</div>
+                        <div class="stats-details">{{item.Interest | currency:"£ "}}</div>
+                    </div>
+                </div>
+                <span flex></span>
+                <br/>
+                <div layout="column">
+                    <div class="table-responsive">
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Invoice #</th>
+                                    <th>
+                                        <a href="#" ng-click="sortType = 'AmountDueInclVAT'; sortReverse = !sortReverse">
+                    Amount Due
+                    <span ng-show="sortType == 'AmountDueInclVAT' && !sortReverse" class="fa fa-sort-amount-asc"></span>
+                    <span ng-show="sortType == 'AmountDueInclVAT' && sortReverse" class="fa fa-sort-amount-desc"></span>
+                  </a>
+                                    </th>
+                                    <th>
+                                        <a href="#" ng-click="sortType = 'Interest'; sortReverse = !sortReverse">
+                    Interest Due
+                    <span ng-show="sortType == 'Interest' && !sortReverse" class="fa fa-sort-amount-asc"></span>
+                    <span ng-show="sortType == 'Interest' && sortReverse" class="fa fa-sort-amount-desc"></span>
+                  </a>
+                                    </th>
+                                    <th>
+                                        <a href="#" ng-click="sortType = 'overdue'; sortReverse = !sortReverse">
+                    Overdue Days
+                    <span ng-show="sortType == 'overdue' && !sortReverse" class="fa fa-sort-amount-asc"></span>
+                    <span ng-show="sortType == 'overdue' && sortReverse" class="fa fa-sort-amount-desc"></span>
+                  </a>
+                                    </th>
+                                    <th>Status</th>
+                                    <th>Invoice Owner</th>
+                                </tr>
+                            </thead>
+                            <tbody ng-repeat="invo in item.invoices | orderBy:sortType:sortReverse" on-finish-render>
+                                <tr data-toggle="collapse" data-target="#{{invo.InvoiceNo}}">
+                                    <td>{{invo.InvoiceNo}}</td>
+                                    <td>{{invo.AmountDueInclVAT | currency:"£ "}}</td>
+                                    <td>{{invo.Interest | currency:"£ "}}</td>
+                                    <td>{{invo.overdue}}</td>
+                                    <td>{{invo.Status}}</td>
+                                    <td>{{invo.InvoiceOwner ? invo.InvoiceOwner : "Unassigned"}}</td>
+                                </tr>
+                                <tr class="hiddenRow">
+                                    <td colspan="12" id="{{invo.InvoiceNo}}" class="collapse">
+                                        <div class="container-fluid">
+                                            <div class="col-sm-4 quickview">
+                                                <span class="qhead">Invoice Date</span> : {{invo.InvoiceDate | date: 'mediumDate'}}
+                                            </div>
+                                            <div class="col-sm-4 quickview">
+                                                <span class="qhead">Due Date</span> : {{invo.DueDate | date: 'mediumDate'}}
+                                            </div>
+                                            <div class="col-sm-4 quickview">
+                                                <span class="qhead">Portfolio</span> : {{invo.Portfolio}}
+                                            </div>
+                                            <div class="col-sm-4 quickview">
+                                                <span class="qhead">Owner</span> : {{invo.COGOwner}}
+                                            </div>
+                                            <div class="col-sm-4 quickview">
+                                                <span class="qhead">Overdue Days</span> : {{invo.overdue}}
+                                            </div>
+                                        </div>
+                                        <a ui-sref="invoice({invoiceId: invo.InvoiceNo})" target="_blank">
+                                            <md-button class="md-fab detailsButton">
+                                                <md-tooltip md-direction="left">
+                                                    View Details or Edit
+                                                </md-tooltip>
+                                                <i class="fa fa-pencil" aria-hidden="true"></i>
+                                            </md-button>
+                                        </a>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </md-dialog-content>
+        <md-dialog-actions layout="row">
+            <span flex></span>
+        </md-dialog-actions>
+    </form>
+</md-dialog>

@@ -1,1 +1,41 @@
-<div>This is the dashboard view.</div>
+<navbar></navbar>
+<div class="container" ngCloak>
+    <div class="row">
+        <div class="mega-head">DASHBOARD</div>
+    </div>
+    <div class="row">
+        <md-select class="col-md-6 dropdown" ng-model="view" ng-change="dashboardCtrl.switchView(view)">
+            <md-option ng-value="'dashboard.portfolio'" selected>Portfolio Overview</md-option>
+            <md-option ng-value="'dashboard.owner'">Owner Overview</md-option>
+        </md-select>
+        <md-button aria-label="Open demo menu" class="filter" ng-click="dashboardCtrl.visibleFlag=!dashboardCtrl.visibleFlag">
+        <md-tooltip md-direction="left">
+          Filter Invoices
+        </md-tooltip>
+            <i class="fa fa-filter" aria-hidden="true"></i>
+        </md-button>
+    </div>
+    <div class="row">
+        <div ng-show="dashboardCtrl.visibleFlag">
+            <div class="container filterPanel">
+                <div class="col-sm-6">
+                    <div class="fhead">Overdue Days Range</div>
+                    <rzslider rz-slider-model="dashboardCtrl.slider.minValue" rz-slider-high="dashboardCtrl.slider.maxValue" rz-slider-options="dashboardCtrl.slider.options"></rzslider>
+                </div>
+                <div class="col-sm-6">
+                    <div class="fhead">Status</div>
+                    <md-select ng-model="ctrl.userState" disabled>
+                        <md-option ng-repeat="state in ['A','B','C']" value="{{state}}">
+                            {{state}}
+                        </md-option>
+                    </md-select>
+                </div>
+
+                <md-button class="md-primary md-raised pull-right" ng-click="dashboardCtrl.reloadstate()">Apply</md-button>
+
+            </div>
+        </div>
+    </div>
+    <div ui-view="portfolio"></div>
+    <div ui-view="owner"></div>
+</div>

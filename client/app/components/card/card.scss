@@ -1,0 +1,72 @@
+card {
+	   display:inline-block;
+  	padding:2rem;
+  	height:200px;
+  	width:200px;	
+  	box-shadow:0 1px 2px #aaa;
+  	background-color:#26A69A;
+  	margin:0.8rem 0.8rem 0.8rem;
+  	border-radius:3px;
+  	box-sizing:box-border;
+  	border-width:3px;
+  	user-select:none;
+  	transition: transform .1s ease-in-out;
+    animation-name: fadeInLeftBig;
+    animation-duration: 0.5s;
+    animation-fill-mode: both;
+  	&:hover{
+  		-webkit-transform: scale(1.05);
+          -ms-transform: scale(1.05);
+          transform: scale(1.05);
+  	}
+  	&.long{
+  		height:250px;
+  		width:400px;
+  		background-color:#009688;
+  	}
+  	&.large{
+  		height:400px;
+  		width:250px;
+  		background-color:#EF6C00;
+  	}
+}
+
+
+.cName{
+  width:100%;
+  color:white;
+  text-align:center;
+  font-size:22px;
+  font-weight:bold;
+  padding-bottom:10px;
+}
+
+.cDue{
+  width:100%;
+  color:white;
+  text-align:center;
+  font-size:18px;
+  font-weight:bold;
+  padding-bottom:10px;
+}
+
+.ilabel{
+  width:100%;
+  color:white;
+  text-align:center;
+  font-size:11px;
+  font-weight:bold;
+}
+
+@keyframes fadeInLeftBig {
+  from {
+    opacity: 0;
+    transform: translate3d(-10px, 0, 0);
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+

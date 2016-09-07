@@ -1,0 +1,24 @@
+<md-button class="md-fab back" onclick="window.history.back()">
+            <i class="fa fa-arrow-left"></i>
+</md-button>
+<div ngf-drop="uploadCtrl.upload($files)" class="drop"
+  ngf-drag-over-class="'dragover'" ngf-multiple="false" 
+  ngf-pattern="'application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'">
+  <md-input-container>
+          <label>Month</label>
+          <md-select ng-model="uploadCtrl.month">
+            <md-option ng-repeat="mon in uploadCtrl.months" ng-value="mon">
+              {{mon}}
+            </md-option>
+          </md-select>
+   </md-input-container>
+  <img src="assets/images/export-rounded-flat.png" class="img-responsive">
+  <div class="overlay" ng-if="uploadCtrl.uploading">{{uploadCtrl.done ? 'Uploaded' : 'Uploading'}} <br/>
+  	 <md-progress-linear md-mode="indeterminate" ng-hide="uploadCtrl.done"></md-progress-linear>
+  </div>
+
+
+  Drag & Drop data sheet here
+<div ngf-no-file-drop>File Drag/Drop is not supported for this browser</div>
+</div>
+

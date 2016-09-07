@@ -15,15 +15,19 @@ html, body,
 }
 .left-panel{
 	background-color: #2980b9;
+	text-align:center;
 }
 
 .left-panel,
 .right-panel{
 		height:100%;
-		text-align:center;
 		display: flex;
 		align-items: center;
     	box-sizing: border-box;
+
+    	>div {
+    		width:100%;
+    	}
 		
 }
 
@@ -43,6 +47,33 @@ html, body,
 
 .btn{
 	border-radius: 30px;
-    width: 222px;
+    min-width: 222px;
     font-weight: bold;
+    &:active {
+    	outline:0;
+    }
+    &:focus{
+    	outline:0;
+    }
 }
+
+@media screen and (max-width:768px){
+	.left-panel{
+		height:30%;
+	}
+	.hero{
+		font-size: 30px;
+		width:100%;
+		line-height: 0.8;
+		color:#f0f8ff;
+
+		.bold{
+			font-size: 50px;
+			font-weight: bold;
+		}
+	}
+	.right-panel{
+		height:70%;
+	}
+}
+

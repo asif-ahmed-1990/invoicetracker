@@ -1,16 +1,16 @@
 'use strict';
 
 class LoginController {
-  constructor(Auth, $location) {
+  constructor(Auth, $location, $state) {
     this.user = {};
     this.errors = {};
     this.submitted = false;
 
     this.Auth = Auth;
     this.$location = $location;
-    console.log(this.Auth.isLoggedIn());
+    this.$state = $state;
     if(this.Auth.isLoggedIn()){
-      this.$location.path('/dashboard');
+      this.$state.go('dashboard.portfolio');
     }
   }
 
@@ -24,7 +24,7 @@ class LoginController {
         })
         .then(() => {
           // Logged in, redirect to home
-          this.$location.path('/dashboard');
+          this.$state.go('dashboard.portfolio');
         })
         .catch(err => {
           this.errors.other = err.message;

@@ -1,0 +1,142 @@
+<div class="invoiceHead">
+    <div class="container">
+        <span># {{invoiceCtrl.invoiceId}}</span>
+        <span class="badge type">{{invoiceCtrl.invoice.TransactionType}}</span>
+        <!-- <span class="badge type" ng-if="invoiceCtrl.invoice.Submitted && !invoiceCtrl.isEditing">Submitted</span>
+        <span class="badge type" ng-if="!invoiceCtrl.invoice.Submitted && !invoiceCtrl.isEditing">Not Submitted</span>
+        <div class="submitSwitch" ng-if="invoiceCtrl.isEditing">
+        <md-switch ng-model="invoiceCtrl.invoice.Submitted" aria-label="Switch 1" >
+            {{invoiceCtrl.invoice.Submitted ? "Submitted" : "Not Submitted"}}
+        </md-switch> -->
+        </div>
+        <div class="col-sm-6">
+            <span ng-if="!invoiceCtrl.isEditing" class="headDesc">{{invoiceCtrl.invoice.InvoiceDescription}}</span>
+        </div>
+    </div>
+</div>
+<div class="container">
+
+    <md-input-container layout ng-if="invoiceCtrl.isEditing" >
+                <label>Description</label>
+                <input type="text" ng-model="invoiceCtrl.invoice.InvoiceDescription">
+    </md-input-container>
+
+
+    <div class="col-sm-6 quickview">
+        <span class="qhead">Invoice Date</span> : {{invoiceCtrl.invoice.InvoiceDate | date: 'mediumDate'}}
+    </div>
+    <div class="col-sm-6 quickview">
+        <span class="qhead">Due Date</span> : {{invoiceCtrl.invoice.DueDate | date: 'mediumDate'}}
+    </div>
+    <div class="col-sm-6 quickview">
+        <span class="qhead">Portfolio</span> : <span ng-if="!invoiceCtrl.isEditing">{{invoiceCtrl.invoice.Portfolio}}</span>
+
+        <md-input-container  ng-if="invoiceCtrl.isEditing">
+                    <input type="text" ng-model="invoiceCtrl.invoice.Portfolio" required md-minlength="1">
+        </md-input-container>
+
+    </div>
+    <div class="col-sm-6 quickview">
+        <span class="qhead">Owner</span> : <span ng-if="!invoiceCtrl.isEditing">{{invoiceCtrl.invoice.COGOwner}}</span>
+
+        <md-input-container  ng-if="invoiceCtrl.isEditing">
+                    <input type="text" ng-model="invoiceCtrl.invoice.COGOwner" required md-minlength="1">
+        </md-input-container>
+
+    </div>
+    <div class="col-sm-6 quickview">
+        <span class="qhead">Amount Due(ExclVAT)</span> : {{invoiceCtrl.invoice.AmountDueExclVAT | currency:"£ "}}
+    </div>
+    <div class="col-sm-6 quickview">
+        <span class="qhead">Amount Due(InclVAT)</span> : {{invoiceCtrl.invoice.AmountDueInclVAT | currency:"£ "}}
+    </div>
+    <div class="col-sm-6 quickview">
+        <span class="qhead">Project ID</span> : {{invoiceCtrl.invoice.ProjectID}}
+    </div>
+    <div class="col-sm-6 quickview">
+        <span class="qhead">Project Description</span> : {{invoiceCtrl.invoice.ProjectDescription}}
+    </div>
+    <div class="col-sm-6 quickview">
+        <span class="qhead">Overdue Days</span> : {{invoiceCtrl.invoice.overdue}}
+    </div>
+    <div class="col-sm-6 quickview">
+        <span class="qhead">Billability Type</span> : {{invoiceCtrl.invoice.BillabilityType}}
+    </div>
+    <div class="col-sm-6 quickview">
+        <span class="qhead">PO</span> : <span ng-if="!invoiceCtrl.isEditing">{{invoiceCtrl.invoice.PO | joinBy:', '}}</span>
+
+         <md-input-container  ng-if="invoiceCtrl.isEditing">
+                    <input type="text" value="{{invoiceCtrl.invoice.PO | joinBy:', '}}" required md-minlength="1">
+        </md-input-container>
+
+    </div>
+    <div class="col-sm-6 quickview">
+        <span class="qhead">SOW-CCN</span> : <span ng-if="!invoiceCtrl.isEditing">{{invoiceCtrl.invoice.SOWCCN | joinBy:', '}}</span>
+
+         <md-input-container  ng-if="invoiceCtrl.isEditing">
+                    <input type="text" value="{{invoiceCtrl.invoice.SOWCCN | joinBy:', '}}" required md-minlength="1">
+        </md-input-container>
+    </div>
+    <div class="col-sm-6 quickview">
+        <span class="qhead">Interest Rate</span> : {{invoiceCtrl.invoice.IntRate}} %
+    </div>
+    <div class="col-sm-6 quickview">
+        <span class="qhead">Interest</span> : {{invoiceCtrl.invoice.Interest | currency:"£ "}}
+    </div>
+</div>
+<md-divider></md-divider>
+<div class="container">
+    <div class="col-sm-6 quickview">
+        <span class="qhead badge">Status</span> : <span ng-if="!invoiceCtrl.isEditing">{{invoiceCtrl.invoice.Status}}</span>
+        <md-input-container  ng-if="invoiceCtrl.isEditing">
+                    <input type="text" ng-model="invoiceCtrl.invoice.Status" required md-minlength="1">
+        </md-input-container>
+    </div>
+    <div class="col-sm-6 quickview">
+        <span class="qhead badge">Pending With</span> : <span ng-if="!invoiceCtrl.isEditing">{{invoiceCtrl.invoice.Pending}}</span>
+        <md-input-container  ng-if="invoiceCtrl.isEditing">
+        <md-select ng-model="invoiceCtrl.invoice.Pending">
+            <md-option value="Centrica">Centrica</md-option>
+            <md-option value="Cognizant">Cognizant</md-option>
+         </md-select>
+        </md-input-container>
+    </div>
+</div>
+<div class="container remarks-container">
+    <div class="col-md-6" style="margin-top:2em;margin-bottom:2em;">
+        <h4 style="margin-bottom:1em;"> Remarks </h4>
+        <div class="ccard paper">
+            <details>
+                <summary style="padding:1em;">{{invoiceCtrl.invoice.Remarks.length}} comments</summary>
+                <ul class="list-group">
+                    <li class="list-group-item" ng-repeat="invo in invoiceCtrl.invoice.Remarks">
+                        <span class="title"> 
+                              <a href="#">{{invo.name}}</a> <time> {{invo.date | date : 'medium'}}</time> 
+                                <p>{{invo.comment}}</p>
+                          </span>
+                    </li>
+                </ul>
+            </details>
+            <form class="remark-form">
+                <md-input-container layout>
+                    <label>Add Comment</label>
+                    <input type="text" ng-model="invoiceCtrl.comment" required md-minlength="1">
+                </md-input-container>
+                <br/>
+                <button type="button" class="btn btn-sm btn-success" ng-click="invoiceCtrl.updateComment()">Post</button>
+            </form>
+        </div>
+    </div>
+</div>
+<div class="edit" ng-class="{post: invoiceCtrl.isEditing}">
+    <md-button class="md-fab" ng-click="invoiceCtrl.handleClick()">
+        <md-tooltip md-direction="left" ng-if="!invoiceCtrl.isEditing" >
+            Edit
+        </md-tooltip>
+        <md-tooltip md-direction="left" ng-if="invoiceCtrl.isEditing" >
+            Commit Changes
+        </md-tooltip>
+        <i class="fa fa-edit" aria-hidden="true" ng-if="!invoiceCtrl.isEditing"></i>
+        <i class="fa fa-paper-plane" aria-hidden="true" ng-if="invoiceCtrl.isEditing"></i>
+    </md-button>
+</div>

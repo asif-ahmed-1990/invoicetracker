@@ -1,8 +1,9 @@
 'use strict';
 
 angular.module('invoiceTrackerApp.admin')
-  .config(function($routeProvider) {
-    $routeProvider.when('/admin', {
+  .config(function($stateProvider) {
+    $stateProvider.state('admin', {
+      url: '/admin',
       templateUrl: 'app/admin/admin.html',
       controller: 'AdminController',
       controllerAs: 'admin',

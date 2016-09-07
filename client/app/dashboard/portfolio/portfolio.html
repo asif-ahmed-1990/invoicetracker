@@ -1,0 +1,10 @@
+<div class="dashboard">
+    <div ng-repeat="val in portfolioCtrl.pdata">
+        <card name="{{val.portfolio}}" amt="{{val.Amount}}" intr="{{val.Interest}}" trackid="{{val.trackid}}" ng-click="portfolioCtrl.showAdvanced($event,val.trackid)"></card>
+    </div>
+
+    <div ng-hide="portfolioCtrl.pdata.length" class="nodata">
+    	<h4>Oops! Found Nothing. Check the filters maybe?</h4>
+    </div>
+
+</div>

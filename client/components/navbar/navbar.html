@@ -1,28 +1,37 @@
 <div class="navbar navbar-default navbar-static-top" ng-controller="NavbarController">
-  <div class="container">
-    <div class="navbar-header">
-      <button class="navbar-toggle" type="button" ng-click="nav.isCollapsed = !nav.isCollapsed">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <a href="/" class="navbar-brand">invoice-tracker</a>
-    </div>
-    <div uib-collapse="nav.isCollapsed" class="navbar-collapse collapse" id="navbar-main">
-      <ul class="nav navbar-nav">
-        <li ng-repeat="item in nav.menu" ng-class="{active: nav.isActive(item.link)}">
-            <a ng-href="{{item.link}}">{{item.title}}</a>
-        </li>
-        <li ng-show="nav.isAdmin()" ng-class="{active: nav.isActive('/admin')}"><a href="/admin">Admin</a></li>
-      </ul>
+  <div class="container-fluid">
+     <ul class="nav navbar-nav">
+       <md-menu md-position-mode="target-right target">
+          <a aria-label="Open demo menu" class="" ng-click="$mdOpenMenu($event)">
+            <img class="img-responsive img-circle profile" id="profile" src="assets/images/person.png"/>
+            <md-tooltip md-direction="left">
+          	Options
+        	</md-tooltip>
+          </a>
+          <md-menu-content width="4" >
+            <md-menu-item>
+              <md-button ui-sref="upload">
+                  <div layout="row" flex>
+                    <p flex>Upload Sheet</p>
+                    <i class="fa fa-upload"style="margin: auto 3px auto 0;"></i>
+                  </div>
+              </md-button>
+            
+            </md-menu-item>
+            <md-divider></md-divider>
+            <md-menu-item>
+              <md-button ui-sref="logout">
+                  <div layout="row" flex>
+                    <p flex>Log Out</p>
+                    <i class="fa fa-sign-out"style="margin: auto 3px auto 0;color:red"></i>
+                  </div>
+              </md-button>
+            </md-menu-item>
+          </md-menu-content>
+        </md-menu>
 
-      <ul class="nav navbar-nav navbar-right">
-        <li ng-hide="nav.isLoggedIn()" ng-class="{active: nav.isActive('/signup')}"><a href="/signup">Sign up</a></li>
-        <li ng-hide="nav.isLoggedIn()" ng-class="{active: nav.isActive('/login')}"><a href="/login">Login</a></li>
-        <li ng-show="nav.isLoggedIn()"><p class="navbar-text">Hello {{ nav.getCurrentUser().name }}</p> </li>
-        <li ng-show="nav.isLoggedIn()" ng-class="{active: nav.isActive('/settings')}"><a href="/settings"><span class="glyphicon glyphicon-cog"></span></a></li>
-        <li ng-show="nav.isLoggedIn()"><a href="/logout">Logout</a></li>
+        
+
       </ul>
     </div>
   </div>

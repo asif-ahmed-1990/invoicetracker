@@ -4,15 +4,11 @@ class NavbarController {
   //end-non-standard
 
   //start-non-standard
-  constructor($location, Auth) {
-    this.$location = $location;
+  constructor(Auth,$state) {
     this.isLoggedIn = Auth.isLoggedIn;
     this.isAdmin = Auth.isAdmin;
     this.getCurrentUser = Auth.getCurrentUser;
-  }
-
-  isActive(route) {
-    return route === this.$location.path();
+    this.$state=$state;
   }
 }
 
