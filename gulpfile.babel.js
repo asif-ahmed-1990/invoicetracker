@@ -502,7 +502,7 @@ gulp.task('build:client', ['styles', 'html', 'constant', 'build:images'], () => 
             .pipe(appFilter.restore)
             .pipe(jsFilter)
                 .pipe(plugins.ngAnnotate())
-                .pipe(plugins.uglify())
+               // .pipe(plugins.uglify())
             .pipe(jsFilter.restore)
             .pipe(cssFilter)
                 .pipe(plugins.cleanCss({
@@ -541,11 +541,11 @@ gulp.task('constant', function() {
 
 gulp.task('build:images', () => {
     return gulp.src(paths.client.images)
-        .pipe(plugins.imagemin({
+        /*.pipe(plugins.imagemin({
             optimizationLevel: 5,
             progressive: true,
             interlaced: true
-        }))
+        }))*/
         .pipe(plugins.rev())
         .pipe(gulp.dest(`${paths.dist}/${clientPath}/assets/images`))
         .pipe(plugins.rev.manifest(`${paths.dist}/${clientPath}/assets/rev-manifest.json`, {
